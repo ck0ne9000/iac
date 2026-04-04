@@ -9,8 +9,8 @@ spec:
     - git:
         repoURL: https://github.com/ck0ne9000/iac
         revision: main
-        directories:
-          - path: gitops/k8s1/*/*
+        files:
+          - path: gitops/k8s1/*/*/definition.yaml
         values:
           type: '{{ index (splitList "/" .path.path) 2 }}'
           application: '{{ index (splitList "/" .path.path) 3 }}'
@@ -31,10 +31,19 @@ spec:
         type: "{{ .values.type }}"
     spec:
       project: default
-      source:
-        repoURL: "https://github.com/ck0ne9000/iac"
-        targetRevision: main
-        path: "{{ .path.path }}"
+      sources:
+        - repoURL: "{{- .defaults.repository }}"
+          chart: "{{ .chartName }}"
+          targetRevision: "{{- .chartVersion }}"
+          helm:
+            releaseName: '{{ "{{ .values.application}}" }}'
+            valueFiles:
+              - "gitops/k8s1/{{.values.type}}/{{.values.application}}/values.yaml"
+            ignoreMissingValueFiles: true
+        - repoURL: https://github.com/ck0ne9000/iac
+          targetRevision: main
+          ref: values
+          path: "gitops/k8s1/{{.values.type}}/{{.values.application}}"
       destination:
         name: in-cluster
         namespace: "{{ .values.application }}"
