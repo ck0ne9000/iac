@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: k8s1
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: https://github.com/ck0ne9000/iac
+        revision: main
+        directories:
+          - path: gitops/k8s1/*/*
+        values:
+          type: {{index (splitList "/" .path.path) 2}}
+          application: {{index (splitList "/" .path.path) 3}}
+
+  strategy:
+    type: RollingSync
+    rollingSync:
+      steps:
+        - matchExpressions:
+            - key: type
+              operator: In
+              values:
+                - infrastructure
+  template:
+    metadata:
+      name: {{.values.application}}
+      labels:
+        type: {{.values.type}}
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/ck0ne9000/iac"
+        targetRevision: main
+        path: {{path}}
+      destination:
+        name: in-cluster
+        namespace: {{.values.application}}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            maxDuration: 3m0s
+            factor: 2
+        syncOptions:
+          - CreateNamespace=true
