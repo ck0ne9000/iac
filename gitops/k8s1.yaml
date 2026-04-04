@@ -35,7 +35,7 @@ spec:
           chart: "{{ .chartName }}"
           targetRevision: "{{- .chartVersion }}"
           helm:
-            releaseName: '{{ "{{ .values.application}}" }}'
+            releaseName: "{{ .values.application}}"
             valueFiles:
               - "gitops/k8s1/{{.values.type}}/{{.values.application}}/values.yaml"
             ignoreMissingValueFiles: true
