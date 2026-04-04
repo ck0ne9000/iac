@@ -12,8 +12,8 @@ spec:
         directories:
           - path: gitops/k8s1/*/*
         values:
-          type: '{{index (splitList "/" .path.path) 2}}'
-          application: '{{index (splitList "/" .path.path) 3}}'
+          type: '{{ index (splitList "/" .path.path) 2 }}'
+          application: '{{ index (splitList "/" .path.path) 3 }}'
 
   strategy:
     type: RollingSync
@@ -26,18 +26,18 @@ spec:
                 - infrastructure
   template:
     metadata:
-      name: {{.values.application}}
+      name: "{{ .values.application }}"
       labels:
-        type: {{.values.type}}
+        type: "{{ .values.type }}"
     spec:
       project: default
       source:
         repoURL: "https://github.com/ck0ne9000/iac"
         targetRevision: main
-        path: {{path}}
+        path: "{{ .path.path }}"
       destination:
         name: in-cluster
-        namespace: {{.values.application}}
+        namespace: "{{ .values.application }}"
       syncPolicy:
         automated:
           prune: true
