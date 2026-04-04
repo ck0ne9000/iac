@@ -1,0 +1,3 @@
+repository: https://charts.jetstack.io
+chartName: cert-manager
+chartVersion: 1.20.1
