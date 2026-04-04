@@ -14,7 +14,6 @@ spec:
         values:
           type: '{{ index (splitList "/" .path.path) 2 }}'
           application: '{{ index (splitList "/" .path.path) 3 }}'
-
   strategy:
     type: RollingSync
     rollingSync:
@@ -32,7 +31,7 @@ spec:
     spec:
       project: default
       sources:
-        - repoURL: "{{- .defaults.repository }}"
+        - repoURL: "{{- .repository }}"
           chart: "{{ .chartName }}"
           targetRevision: "{{- .chartVersion }}"
           helm:
