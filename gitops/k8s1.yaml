@@ -61,5 +61,5 @@ spec:
         syncOptions:
           - CreateNamespace=true
       {{- if .serverSideApply }}
-          - ServerSideApply=false
+          - ServerSideApply=true
       {{- end }}
