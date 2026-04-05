@@ -1,3 +1,4 @@
 repository: https://charts.external-secrets.io
 chartName: external-secrets
 chartVersion: 2.2.0
+serverSideApply: true
