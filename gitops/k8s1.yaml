@@ -37,12 +37,11 @@ spec:
           helm:
             releaseName: "{{ .values.application}}"
             valueFiles:
-              - "gitops/k8s1/{{.values.type}}/{{.values.application}}/values.yaml"
+              - "$values/gitops/k8s1/{{.values.type}}/{{.values.application}}/values.yaml"
             ignoreMissingValueFiles: true
         - repoURL: https://github.com/ck0ne9000/iac
           targetRevision: main
           ref: values
-          path: "gitops/k8s1/{{.values.type}}/{{.values.application}}"
       destination:
         name: in-cluster
         namespace: "{{ .values.application }}"
