@@ -46,9 +46,11 @@ spec:
       destination:
         name: in-cluster
         namespace: "{{ .values.application }}"
+  templatePatch: |
+    spec:
       syncPolicy:
         automated:
-          prune: true
+          prune: false
           selfHeal: true
         retry:
           limit: 5
@@ -58,3 +60,6 @@ spec:
             factor: 2
         syncOptions:
           - CreateNamespace=true
+      {{- if eq .serverSideApply "true"  }}
+          - ServerSideApply=false
+      {{- end }}
