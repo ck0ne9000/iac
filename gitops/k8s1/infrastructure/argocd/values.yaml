@@ -4,3 +4,6 @@ server:
   ingress:
     enabled: true
     hostname: argocd.k8s1.christiank.dev
+    tls: true
+    annotations:
+      cert-manager.io/issuer: "letsencrypt-staging"
