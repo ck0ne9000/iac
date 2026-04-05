@@ -1,2 +1,6 @@
 global:
   domain: argocd.k8s1.christiank.dev
+server:
+  ingress:
+    enabled: true
+    hostname: argocd.k8s1.christiank.dev
