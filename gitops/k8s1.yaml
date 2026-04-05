@@ -42,6 +42,7 @@ spec:
         - repoURL: https://github.com/ck0ne9000/iac
           targetRevision: main
           ref: values
+          path: "gitops/k8s1/{{.values.type}}/{{.values.application}}"
       destination:
         name: in-cluster
         namespace: "{{ .values.application }}"
