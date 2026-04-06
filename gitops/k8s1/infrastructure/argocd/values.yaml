@@ -1,9 +1,13 @@
 global:
   domain: argocd.k8s1.christiank.dev
 server:
-  ingress:
-    enabled: false
-    hostname: argocd.k8s1.christiank.dev
-    tls: true
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-production"
+  httproute:
+    enabled: true
+    hostnames:
+      - argocd.k8s1.christiank.dev
+  grpcroute:
+    enabled: true
+    hostnames:
+      - argocd.k8s1.christiank.dev
+  backendTLSPolicy:
+    enabled: true
