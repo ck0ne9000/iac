@@ -1,3 +1,4 @@
 repository: https://prometheus-community.github.io/helm-charts
 chartName: kube-prometheus-stack
 chartVersion: 82.14.0
+serverSideApply: true
