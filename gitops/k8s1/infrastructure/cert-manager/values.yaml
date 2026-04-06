@@ -1,1 +1,6 @@
 installCRDs: true
+config:
+  enableGatewayAPI: true
+  enableGatewayAPIListenerSet: true
+  featureGates:
+    ListenerSets: true
