@@ -2,7 +2,7 @@ global:
   domain: argocd.k8s1.christiank.dev
 server:
   ingress:
-    enabled: true
+    enabled: false
     hostname: argocd.k8s1.christiank.dev
     tls: true
     annotations:
