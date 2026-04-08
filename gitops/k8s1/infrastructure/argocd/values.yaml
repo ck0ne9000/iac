@@ -8,17 +8,26 @@ server:
         namespace: traefik
     hostnames:
       - argocd.k8s1.christiank.dev
-  grpcroute:
-    enabled: true
-    parentRefs:
-      - name: traefik
-        namespace: traefik
-    hostnames:
-      - argocd.k8s1.christiank.dev
-  backendTLSPolicy:
-    enabled: true
-    targetRefs:
-      - group: ""
-        kind: Service
-        name: argocd-server
-        sectionName: https
+  # grpcroute:
+  #   enabled: true
+  #   parentRefs:
+  #     - name: traefik
+  #       namespace: traefik
+  #   hostnames:
+  #     - grpc.argocd.k8s1.christiank.dev
+  #   rules:
+  #     - backendRefs:
+  #         - name: argocd-server
+  #           port: 443
+  # backendTLSPolicy:
+  #   enabled: true
+  #   targetRefs:
+  #     - group: ""
+  #       kind: Service
+  #       name: argocd-server
+  #   validation:
+  #     caCertificateRefs:
+  #       - kind: ConfigMap
+  #         name: argocd-server-ca-cert
+  #         group: ""
+  #     hostname: argocd-server.argocd
