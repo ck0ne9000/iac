@@ -1,4 +1,5 @@
 global:
   domain: argocd.k8s1.christiank.dev
-server:
-  insecure: true
+configs:
+  params:
+    server.insecure: "true"
