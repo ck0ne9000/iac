@@ -7,7 +7,6 @@ spec:
   parentRefs:
     - name: traefik
       namespace: traefik
-      sectionName: argocd-https
   hostnames:
     - "argocd.k8s1.christiank.dev"
   rules:
