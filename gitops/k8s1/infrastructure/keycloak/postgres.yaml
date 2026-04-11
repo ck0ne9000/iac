@@ -5,8 +5,17 @@ metadata:
 spec:
   instances: 3
   storage:
-    size: 1Gi
-    storageClass: oci-bv
+    pvcTemplate:
+      metadata:
+        labels:
+          app: keycloak-database
+      spec:
+        storageClassName: oci-bv
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
   managed:
     roles:
       - name: keycloak
