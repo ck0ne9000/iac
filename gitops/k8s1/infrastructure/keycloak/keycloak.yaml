@@ -1,0 +1,21 @@
+apiVersion: k8s.keycloak.org/v2beta1
+kind: Keycloak
+metadata:
+  name: keycloak
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  instances: 1
+  db:
+    vendor: postgres
+    host: keycloak-database-rw
+    usernameSecret:
+      name: keycloak-postgres-credentials
+      key: username
+    passwordSecret:
+      name: keycloak-postgres-credentials
+      key: password
+  ingress:
+    enabled: false
+  hostname:
+    hostname: keycloak.k8s1.christiank.dev
